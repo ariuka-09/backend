@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "first step of learning backend",
+  "main": "index.js",
+  "scripts": {
+    "d": "nodemon inde.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JS",
+    "backend"
+  ],
+  "author": "Ariuntuguldur",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "body-parser": "^2.2.0",
+    "chalk": "^5.6.2",
+    "diff": "^8.0.2",
+    "dotenv": "^17.2.3",
+    "env": "^0.0.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  },
+  "type": "module"
+}

@@ -70,7 +70,7 @@ app.put('/student', (request, response)=>{
         }
     }
 
-response.send("update successful")
+response.send("updated successfully")
 
 })
 

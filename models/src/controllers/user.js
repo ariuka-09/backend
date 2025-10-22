@@ -2,6 +2,8 @@ import { User } from "../models/user.js";
 
 export const createUser = (request, response) => {
   try {
+    if(Array.isArray(request.body)){ request.body = [request.body]}
+    //has problem
     const result = [];
     for(let i = 0 ; i < request.body.length; i++){
         result.push(User.create({
@@ -10,7 +12,7 @@ export const createUser = (request, response) => {
             password: request.body[i].phone,
             age: request.body[i].age,
           }))
-    }
+    }   
     response.send(result), console.log("req body", request.body.length);
   } catch (error) {
     console.error("error", error);

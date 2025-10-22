@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import axios from "axios";
 import express, { response } from "express";
 import bodyParser from "body-parser";
 import { configDotenv } from "dotenv";
@@ -26,7 +25,7 @@ app.listen(port, () => {
   connectDB();
 });
 
-app.post("/student", createUser);
+app.post("/student", createUser); 
 app.get("/student-detail", getUser);
 app.get('/student-detail/:id',getUserById);
 app.delete('/student', deleteUserById)

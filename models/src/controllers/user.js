@@ -21,9 +21,20 @@ export const getUser = async (request, response) => {
     console.error("error", error);
   }
 };
-export const getUserById = (request, response) => {
+export const getUserById = async (request, response) => {
+    const {id} = request.params;
   try {
-    const result = User.findById(id);
+    const result = await User.findById(id);
+    response.send(result), console.log("req body", request.body);
+
+  } catch (error) {
+    console.error("error", error);
+  }
+};
+export const deleteUserById = async (request, response) => {
+    const {_id} = request.body;
+  try {
+    const result = await User.findByIdAndDelete(_id);
     response.send(result), console.log("req body", request.body);
   } catch (error) {
     console.error("error", error);

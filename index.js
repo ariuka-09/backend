@@ -6,6 +6,7 @@ import { configDotenv } from "dotenv";
 import { connectDB } from "./db.js";
 import {
   createUser,
+  deleteUserById,
   getUser,
   getUserById,
 } from "./models/src/controllers/user.js";
@@ -47,8 +48,9 @@ app.listen(port, () => {
 //     //answer it can only return 1 array
 // })
 app.get("/student-detail", getUser);
-app.get("/student-detail", () => getUserById());
+app.get('/student-detail/:id',getUserById);
 app.post("/student", createUser);
+app.delete('/student', deleteUserById)
 
 // app.delete("student", deleteUser);
 // app.post('/student', (request, response)=>{
@@ -73,22 +75,22 @@ app.post("/student", createUser);
 //     }
 // })
 
-app.delete("/student", (request, response) => {
-  console.log(request.body);
-  for (let i = 0; i < studentArray.length; i++) {
-    if (request.body.phone == studentArray[i].phone) {
-      studentArray.splice(i, 1);
-    }
-  }
-  response.send("deletion successful");
-});
+// app.delete("/student", (request, response) => {
+//   console.log(request.body);
+//   for (let i = 0; i < studentArray.length; i++) {
+//     if (request.body.phone == studentArray[i].phone) {
+//       studentArray.splice(i, 1);
+//     }
+//   }
+//   response.send("deletion successful");
+// });
 
-app.put("/student", (request, response) => {
-  console.log(request.body);
-  for (let i = 0; i < studentArray.length; i++) {
-    if (request.body.target.phone == studentArray[i].phone) {
-      studentArray[i] = request.body.update;
-    }
-  }
-  response.send("updated successfully");
-});
+// app.put("/student", (request, response) => {
+//   console.log(request.body);
+//   for (let i = 0; i < studentArray.length; i++) {
+//     if (request.body.target.phone == studentArray[i].phone) {
+//       studentArray[i] = request.body.update;
+//     }
+//   }
+//   response.send("updated successfully");
+// });

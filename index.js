@@ -9,6 +9,7 @@ import {
   deleteUserById,
   getUser,
   getUserById,
+  updateUserById,
 } from "./models/src/controllers/user.js";
 
 configDotenv();
@@ -20,13 +21,16 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
-let studentArray = [];
-
 app.listen(port, () => {
   console.log(chalk.magenta(`server is serving! http://localhost${port}`));
   connectDB();
 });
 
+app.post("/student", createUser);
+app.get("/student-detail", getUser);
+app.get('/student-detail/:id',getUserById);
+app.delete('/student', deleteUserById)
+app.put('/student', updateUserById)
 // app.get('/student-detail',  (request, response)=>{
 //     const {number} = request.params;
 //     console.log(number, "number");
@@ -47,10 +51,6 @@ app.listen(port, () => {
 //     //why isnt this spreading properly?
 //     //answer it can only return 1 array
 // })
-app.get("/student-detail", getUser);
-app.get('/student-detail/:id',getUserById);
-app.post("/student", createUser);
-app.delete('/student', deleteUserById)
 
 // app.delete("student", deleteUser);
 // app.post('/student', (request, response)=>{

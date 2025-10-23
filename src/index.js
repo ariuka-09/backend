@@ -2,34 +2,34 @@ import chalk from "chalk";
 import express, { response } from "express";
 import bodyParser from "body-parser";
 import { configDotenv } from "dotenv";
-import { connectDB } from "./db.js";
+import { connectDB } from "./database/db.js";
 import {
   createUser,
+  createUsers,
   deleteUserById,
   getUser,
   getUserById,
   updateUserById,
-} from "./models/src/controllers/user.js";
+} from "./controllers/user.js";
+import { UserRouter } from "./routers/user.js";
 
 configDotenv();
-
+const port = process.env.PORT;
 console.log(process.env.PORT, "port");
 const app = express();
-
-const port = process.env.PORT;
-
 app.use(bodyParser.json());
+
+app.use('/', UserRouter)
+
+
+
 
 app.listen(port, () => {
   console.log(chalk.magenta(`server is serving! http://localhost${port}`));
   connectDB();
 });
 
-app.post("/student", createUser); 
-app.get("/student-detail", getUser);
-app.get('/student-detail/:id',getUserById);
-app.delete('/student', deleteUserById)
-app.put('/student', updateUserById)
+
 // app.get('/student-detail',  (request, response)=>{
 //     const {number} = request.params;
 //     console.log(number, "number");

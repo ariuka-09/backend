@@ -1,23 +1,41 @@
+import { response } from "express";
 import { User } from "../models/user.js";
 
-export const createUser = (request, response) => {
+export const createUsers = async (request, response) => {
+  console.log(request.body);
+  
   try {
-    if(Array.isArray(request.body)){ request.body = [request.body]}
-    //has problem
-    const result = [];
-    for(let i = 0 ; i < request.body.length; i++){
-        result.push(User.create({
+const length = await request.body.length
+    for(let i = 0 ; i < length; i++){
+        await User.create({
             username: request.body[i].username,
-            email: request.body[i].name,
-            password: request.body[i].phone,
+            name: request.body[i].name,
+            phone: request.body[i].phone,
             age: request.body[i].age,
-          }))
+        })
     }   
-    response.send(result), console.log("req body", request.body.length);
+    response.send("result"), console.log("req body", request.body.length);
   } catch (error) {
     console.error("error", error);
+    response.status(400).send("wrong data")
   }
 };
+export const createUser = async (request, response)=>{
+  try {
+   await User.create(
+      {
+        username:request.body.username,
+        name:request.body.name,
+        phone:request.body.phone,
+        age:request.body.age,
+      }
+
+    )
+    response.status(200).send("a student has been added successfully")
+  } catch (error) {
+    
+  }
+}
 export const getUser = async (request, response) => {
   try {
     const result = await User.find();
